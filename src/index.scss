@@ -18,3 +18,9 @@ body {
 a,a:hover{
     color:$fontColor !important
 }
+
+.spanStyle:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    transition: .3s;
+}

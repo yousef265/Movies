@@ -4,51 +4,43 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
-    });
+export default function ResetPassword() {
     const [validateErrors, setValidateErrors] = useState([]);
     const [APiErrors, setAPiErrors] = useState(null);
     const [IsLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const getUserData = (e) => {
-        const { name, value } = e.target;
-        setUser({ ...user, [name]: value });
-    };
 
     const schema = Joi.object({
-        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
         password: Joi.string().pattern(new RegExp("^[A-Z][a-z]{5,10}$")).required().messages({
             "string.pattern.base": "must be first letter is uppercase and at lest 6 characters small and the length less than 10 characters",
         }),
     });
 
     function validateUser() {
-        let validationData = schema.validate(user, { abortEarly: false });
+        let { error } = schema.validate({ password });
 
-        if (validationData) {
-            if (validationData.error) {
-                setValidateErrors(validationData.error.details);
-                return false;
-            } else {
-                setValidateErrors(["done"]);
-                return true;
-            }
+        if (error) {
+            setValidateErrors(error.details);
+            return false;
+        } else {
+            setValidateErrors(["done"]);
+            return true;
         }
     }
 
-    async function loginFormData(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         if (validateUser()) {
             setIsLoading(true);
             try {
-                const { data } = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", user);
-                localStorage.setItem("token", data.token);
-                navigate("/");
+                const { data } = await axios.put("https://ecommerce.routemisr.com/api/v1/auth/resetPassword", {
+                    email: localStorage.getItem("email"),
+                    newPassword: password,
+                });
+                navigate("/login");
                 setAPiErrors(null);
                 setIsLoading(false);
             } catch ({ response }) {
@@ -61,12 +53,12 @@ export default function Login() {
     return (
         <>
             <div className="w-50 m-auto py-5 mb-5">
-                <h2 className="mb-5">Login Form</h2>
+                <h2 className="mb-5">Reset Password</h2>
 
                 {APiErrors && <div className="alert alert-danger">{APiErrors}</div>}
 
-                <form onSubmit={(e) => loginFormData(e)}>
-                    <div className="input-data my-2">
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    {/* <div className="input-data my-2">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -78,19 +70,17 @@ export default function Login() {
                             name="email"
                         />
                         {validateErrors.find((e) => e.context?.label === "email") && <div className="alert alert-danger ">{validateErrors.find((e) => e.context?.label === "email").message}</div>}
-                    </div>
+                    </div> */}
+
+                    <div className="alert alert-secondary fw-bold h5">{localStorage.getItem("email")}</div>
+
                     <div className="input-data my-2 ">
-                        <div className="d-flex justify-content-between align-items-center my-3">
-                            <label htmlFor="password">Password</label>
-                            <Link className="mb-0 text-muted" to={"/forgetPassword"}>
-                                Forget?
-                            </Link>
-                        </div>
+                        <label htmlFor="password">NewPassword</label>
                         <div className="d-flex align-items-center">
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password"
-                                onChange={(e) => getUserData(e)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className={`form-control my-2 ${
                                     validateErrors.length !== 0 && (validateErrors.find((e) => e.context?.label === "password") ? "is-invalid" : validateErrors[0] === "done" ? "is-valid" : "is-valid")
                                 }`}
@@ -103,15 +93,8 @@ export default function Login() {
                         </div>
                         {validateErrors.find((e) => e.context?.label === "password") && <div className="alert alert-danger">{validateErrors.find((e) => e.context?.label === "password").message}</div>}
                     </div>
-                    <div className="d-flex justify-content-between align-items-center mt-3">
-                        <p className="text-muted mb-0">
-                            Don't have an account ?
-                            <Link className="text-muted" to={"/register"}>
-                                Register
-                            </Link>
-                        </p>
-                        <button className={`btn btn-info `}>{IsLoading ? <i className="fa fa-spinner fa-spin"></i> : "Login"}</button>
-                    </div>
+
+                    <button className={`btn btn-info d-block ms-auto `}>{IsLoading ? <i className="fa fa-spinner fa-spin"></i> : "Rest Password"}</button>
                 </form>
             </div>
         </>

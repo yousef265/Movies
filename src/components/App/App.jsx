@@ -8,6 +8,9 @@ import Login from "./../Login/Login";
 import People from "./../People/People";
 import Home from "./../Home/Home";
 import Notfound from "./../Notfound/Notfound";
+import ForgetPassword from "../ForgetPassword/ForgetPassword";
+import OTPCode from "../OTPCode/OTPCode";
+import ResetPassword from "../ResetPassword/ResetPassword";
 
 function App() {
     let routes = createBrowserRouter([
@@ -22,6 +25,9 @@ function App() {
                 { path: "register", element: <Register /> },
                 { path: "people", element: <People /> },
                 { path: "login", element: <Login /> },
+                { path: "forgetPassword", element: <ForgetPassword /> },
+                { path: "otpCode", element: <OTPCode /> },
+                { path: "resetPassword", element: <ResetPassword /> },
                 { path: "*", element: <Notfound /> },
             ],
         },
