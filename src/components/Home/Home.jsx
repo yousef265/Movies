@@ -1,42 +1,48 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import styles from "./Home.module.scss";
+import React, { useContext, useEffect, useState } from "react";
+import Item from "../Item/Item";
+import { UserData } from "../../Context/UserData";
 
 export default function Home() {
-    const [trendingItems, setTrendingItems] = useState([]);
+    const { getData } = useContext(UserData);
+    const [moviesData, setMoviesData] = useState("");
+    const [tvsData, setTvsData] = useState("");
+    const [peopleData, setPeopleData] = useState("");
+
     useEffect(() => {
-        getTrendingItems();
+        getData("movie", setMoviesData);
+        getData("tv", setTvsData);
+        getData("person", setPeopleData);
     }, []);
 
-    let getTrendingItems = async () => {
-        let { data } = await axios.get("https://api.themoviedb.org/3/trending/all/day?api_key=c636ed7787cc302d96bf88ccf334e0d8");
-        setTrendingItems(data.results);
-    };
+    const renderSection = (title, description, data) => (
+        <div className="row my-5">
+            <div className="col-md-4">
+                <div className="content h-100 d-flex flex-column justify-content-center">
+                    <h2 className="position-relative">
+                        Trending <br /> {title} <br /> To watch now
+                    </h2>
+                    <p className="text-muted mt-2">{description}</p>
+                </div>
+            </div>
+            {data.slice(0, 10).map((item) => (
+                <Item key={item.id} data={item} />
+            ))}
+        </div>
+    );
+
     return (
         <>
-            <div className="row my-3 py-5">
-                <div className="col-md-4">
-                    <div>
-                        <div className={`${styles.brdr} w-25 mb-4`}></div>
-                        <h3>Trending</h3>
-                        <h3>Movies</h3>
-                        <h3>To watch now</h3>
-                        <span className="text-muted">most watched movies by day</span>
-                        <div className={`${styles.brdr} mt-4 w-100`}></div>
-                    </div>
+            {tvsData && moviesData && peopleData ? (
+                <div className="row py-5">
+                    {moviesData && renderSection("Movies", "Most watched movies by day", moviesData)}
+
+                    {tvsData && renderSection("TV", "Most watched TV shows by day", tvsData)}
+
+                    {peopleData && renderSection("Person", "Most popular persons by day", peopleData)}
                 </div>
-                {trendingItems.map((item, index) => (
-                    <div key={index} className="col-md-2">
-                        <div className="item">
-                            <img className="w-100" src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="" />
-                            <h6>
-                                {item.title}
-                                {item.name}
-                            </h6>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            ) : (
+                <i className="fa fa-spinner position-absolute top-50 start-50 fa-spin fs-1 "></i>
+            )}
         </>
     );
 }

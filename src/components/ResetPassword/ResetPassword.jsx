@@ -54,6 +54,7 @@ export default function ResetPassword() {
         <>
             <div className="w-50 m-auto py-5 mb-5">
                 <h2 className="mb-5">Reset Password</h2>
+                <p className="text-center text-muted mb-3"> We have verified your code. Please enter a new password.</p>
 
                 {APiErrors && <div className="alert alert-danger">{APiErrors}</div>}
 

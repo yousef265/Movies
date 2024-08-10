@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from "react";
+import { UserData } from "../../Context/UserData";
+import Item from "../Item/Item";
 
 export default function Movies() {
-  return (
-    <div>Movies</div>
-  )
+    const { getData } = useContext(UserData);
+    const [moviesData, setMoviesData] = useState("");
+
+    useEffect(() => {
+        getData("movie", setMoviesData);
+    }, []);
+
+    return (
+        <>
+            {moviesData ? (
+                <div className="row py-5">
+                    {moviesData.map((item) => (
+                        <Item data={item} />
+                    ))}
+                </div>
+            ) : (
+                <i className="fa fa-spinner position-absolute top-50 start-50 fa-spin fs-1 "></i>
+            )}
+        </>
+    );
 }

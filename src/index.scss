@@ -10,17 +10,88 @@ $secondFontColor:#949cb0;
 
 
 body {
- background-color: $bgColor;
- color:$fontColor;
- font-family: 'Montserrat Alternates', sans-serif;
+    background-color: $bgColor;
+    color:$fontColor;
+    font-family: 'Montserrat Alternates', sans-serif;
+
+    a,a:hover{
+        color:$fontColor !important
+    }
+
+    .spanStyle:hover{
+        cursor: pointer;
+        text-decoration: underline;
+        transition: .3s;
+    }
+ 
+    .logout{
+        cursor: pointer;
+    }
+
+    .content {
+        h2::before {
+            content: "";
+            position: absolute;
+            width: 25%;
+            height: 2px;
+            background-color: $borderColor; 
+            top: -10px;
+    }
+        h2::after{
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 75%;
+            height: 2px;
+            background-color: $borderColor; 
+            bottom: -10px;
+        }
+    }
+
+    .item {
+        cursor: pointer;
+    
+        .layer {
+            position: absolute;
+            inset: 0;
+            text-align: center;
+            padding: 10px 5px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            top: 100%;
+            transition: .3s;
+        }
+    
+        img {
+            transition: .3s;
+        }
+    
+        &:hover .layer {
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        &:hover img {
+            transform: scale(1.2);
+        }
+
+        
+
+        .vote {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+        }
+    }
 }
 
-a,a:hover{
-    color:$fontColor !important
-}
 
-.spanStyle:hover{
-    cursor: pointer;
-    text-decoration: underline;
-    transition: .3s;
-}
+
+
+
+
+
+
+

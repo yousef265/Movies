@@ -1,8 +1,8 @@
 import axios from "axios";
 import Joi from "joi";
-import React from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { UserData } from "../../Context/UserData";
 
 export default function Login() {
     const [user, setUser] = useState({
@@ -13,7 +13,10 @@ export default function Login() {
     const [APiErrors, setAPiErrors] = useState(null);
     const [IsLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
+    const { handleUserData } = useContext(UserData);
     const navigate = useNavigate();
+
     const getUserData = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
@@ -43,11 +46,13 @@ export default function Login() {
     async function loginFormData(e) {
         e.preventDefault();
 
+        handleRememberMe();
         if (validateUser()) {
             setIsLoading(true);
             try {
                 const { data } = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", user);
                 localStorage.setItem("token", data.token);
+                handleUserData();
                 navigate("/");
                 setAPiErrors(null);
                 setIsLoading(false);
@@ -57,6 +62,25 @@ export default function Login() {
             }
         }
     }
+
+    function handleRememberMe() {
+        if (rememberMe) {
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("remember", rememberMe);
+        } else {
+            localStorage.removeItem("email", user.email);
+            localStorage.removeItem("remember", rememberMe);
+        }
+    }
+
+    useEffect(() => {
+        const email = localStorage.getItem("email");
+        const remember = localStorage.getItem("remember") === "true";
+        if (email && remember) {
+            user.email = email;
+            setRememberMe(remember);
+        }
+    }, []);
 
     return (
         <>
@@ -76,6 +100,7 @@ export default function Login() {
                                 validateErrors.length !== 0 && (validateErrors.find((e) => e.context?.label === "email") ? "is-invalid" : validateErrors[0] === "done" ? "is-valid" : "is-valid")
                             }`}
                             name="email"
+                            value={user.email}
                         />
                         {validateErrors.find((e) => e.context?.label === "email") && <div className="alert alert-danger ">{validateErrors.find((e) => e.context?.label === "email").message}</div>}
                     </div>
@@ -102,6 +127,12 @@ export default function Login() {
                             </button>
                         </div>
                         {validateErrors.find((e) => e.context?.label === "password") && <div className="alert alert-danger">{validateErrors.find((e) => e.context?.label === "password").message}</div>}
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} type="checkbox" id="flexCheckDefault" />
+                        <label className="form-check-label" htmlFor="flexCheckDefault">
+                            Remember me
+                        </label>
                     </div>
                     <div className="d-flex justify-content-between align-items-center mt-3">
                         <p className="text-muted mb-0">

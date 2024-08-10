@@ -11,6 +11,8 @@ import Notfound from "./../Notfound/Notfound";
 import ForgetPassword from "../ForgetPassword/ForgetPassword";
 import OTPCode from "../OTPCode/OTPCode";
 import ResetPassword from "../ResetPassword/ResetPassword";
+import UserDataProvider from "../../Context/UserData";
+import { PrimeReactProvider } from "primereact/api";
 
 function App() {
     let routes = createBrowserRouter([
@@ -35,7 +37,11 @@ function App() {
 
     return (
         <div>
-            <RouterProvider router={routes} />
+            <PrimeReactProvider>
+                <UserDataProvider>
+                    <RouterProvider router={routes} />
+                </UserDataProvider>
+            </PrimeReactProvider>
         </div>
     );
 }
