@@ -13,7 +13,9 @@ body {
     background-color: $bgColor;
     color:$fontColor;
     font-family: 'Montserrat Alternates', sans-serif;
-
+    ul {
+        list-style-type: none ;
+    }
     a,a:hover{
         color:$fontColor !important
     }
@@ -49,8 +51,6 @@ body {
     }
 
     .item {
-        cursor: pointer;
-    
         .layer {
             position: absolute;
             inset: 0;

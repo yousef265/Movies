@@ -8,14 +8,14 @@ export default function TvShows() {
 
     useEffect(() => {
         getData("tv", setTvData);
-    }, []);
+    }, [getData]);
 
     return (
         <>
             {tvData ? (
                 <div className="row py-5">
                     {tvData.map((item) => (
-                        <Item data={item} />
+                        <Item data={item} key={item.id} />
                     ))}
                 </div>
             ) : (

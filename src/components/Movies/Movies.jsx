@@ -8,14 +8,14 @@ export default function Movies() {
 
     useEffect(() => {
         getData("movie", setMoviesData);
-    }, []);
+    }, [getData]);
 
     return (
         <>
             {moviesData ? (
                 <div className="row py-5">
                     {moviesData.map((item) => (
-                        <Item data={item} />
+                        <Item data={item} key={item.id} />
                     ))}
                 </div>
             ) : (

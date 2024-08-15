@@ -20,11 +20,16 @@ function UserDataProvider(props) {
     }, []);
 
     async function getData(mediaType, callback) {
-        let { data } = await axios.get(`https://api.themoviedb.org/3/trending/${mediaType}/day?api_key=c636ed7787cc302d96bf88ccf334e0d8`);
+        let { data } = await axios.get(`https://api.themoviedb.org/3/trending/${mediaType}/day?api_key=62ead689c7ce69ca894c11b092df4192`);
         callback(data.results);
     }
 
-    return <UserData.Provider value={{ userData, setUserData, handleUserData, getData }}>{props.children}</UserData.Provider>;
+    async function getDetails(mediaType, id, callback) {
+        let { data } = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${id}?api_key=62ead689c7ce69ca894c11b092df4192&append_to_response=videos,images`);
+        callback(data);
+    }
+
+    return <UserData.Provider value={{ userData, setUserData, handleUserData, getData, getDetails }}>{props.children}</UserData.Provider>;
 }
 
 export default UserDataProvider;

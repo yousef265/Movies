@@ -13,6 +13,7 @@ import OTPCode from "../OTPCode/OTPCode";
 import ResetPassword from "../ResetPassword/ResetPassword";
 import UserDataProvider from "../../Context/UserData";
 import { PrimeReactProvider } from "primereact/api";
+import Details from "../Details/Details";
 
 function App() {
     let routes = createBrowserRouter([
@@ -26,6 +27,7 @@ function App() {
                 { path: "tvShows", element: <TvShows /> },
                 { path: "register", element: <Register /> },
                 { path: "people", element: <People /> },
+                { path: "details/:id/:type", element: <Details /> },
                 { path: "login", element: <Login /> },
                 { path: "forgetPassword", element: <ForgetPassword /> },
                 { path: "otpCode", element: <OTPCode /> },

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.scss";
 import { UserData } from "../../Context/UserData";
@@ -15,7 +15,7 @@ export default function Navbar() {
 
     return (
         <nav className={`navbar navbar-expand-lg ${styles.bgNavbar} py-3`}>
-            <div className="container-fluid">
+            <div className="container">
                 <Link className="navbar-brand" to="">
                     Noxe
                 </Link>
@@ -32,7 +32,7 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {userData && (
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav  mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link" to="">
                                     Home
@@ -61,15 +61,9 @@ export default function Navbar() {
                         </ul>
                     )}
 
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <div className="social-media d-flex align-items-center">
-                            <i className="fab fa-facebook mx-2"></i>
-                            <i className="fab fa-spotify  mx-2"></i>
-                            <i className="fab fa-instagram  mx-2"></i>
-                            <i className="fab fa-youtube  mx-2"></i>
-                        </div>
+                    <ul className="navbar-nav  ms-auto mb-lg-0">
                         {userData ? (
-                            <li className="nav-item ">
+                            <li className="nav-item ms-0 ps-0">
                                 <span className="logout" onClick={handleLogout}>
                                     Logout
                                 </span>

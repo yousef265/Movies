@@ -8,13 +8,13 @@ export default function People() {
 
     useEffect(() => {
         getData("person", setPeopleData);
-    }, []);
+    }, [getData]);
     return (
         <>
             {peopleData ? (
                 <div className="row py-5">
                     {peopleData.map((item) => (
-                        <Item data={item} />
+                        <Item data={item} key={item.id} />
                     ))}
                 </div>
             ) : (
