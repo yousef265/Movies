@@ -38,16 +38,64 @@ export default function Navbar() {
                                     Home
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="movies">
+
+                            <li className="nav-item dropdown">
+                                <Link className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Movies
                                 </Link>
+                                <ul className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <Link className="dropdown-item" to={"/movies/popular"}>
+                                            Popular
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="dropdown-item" to={"/movies/now_playing"}>
+                                            Now Playing
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="dropdown-item" to={"/movies/top_rated"}>
+                                            Top Rated
+                                        </Link>
+                                    </li>
+
+                                    <li>
+                                        <Link className="dropdown-item" to={"/movies/upcoming"}>
+                                            UpComing
+                                        </Link>
+                                    </li>
+                                </ul>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="tvShows">
-                                    Tv shows
+                            <li className="nav-item dropdown">
+                                <Link className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tv Shows
                                 </Link>
+                                <ul className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <Link className="dropdown-item" to={"/tvShows/popular"}>
+                                            Popular
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="dropdown-item" to={"/tvShows/airing_today"}>
+                                            Airing Today
+                                        </Link>
+                                    </li>
+
+                                    <li>
+                                        <Link className="dropdown-item" to={"/tvShows/on_the_air"}>
+                                            On TV
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link className="dropdown-item" to={"/tvShows/top_rated"}>
+                                            Top Rated
+                                        </Link>
+                                    </li>
+                                </ul>
                             </li>
+
                             <li className="nav-item">
                                 <Link className="nav-link" to="people">
                                     People

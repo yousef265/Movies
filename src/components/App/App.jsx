@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import MasterLayout from "../MasterLayout/MasterLayout";
 import About from "./../About/About";
 import Movies from "./../Movies/Movies";
@@ -14,24 +14,73 @@ import ResetPassword from "../ResetPassword/ResetPassword";
 import UserDataProvider from "../../Context/UserData";
 import { PrimeReactProvider } from "primereact/api";
 import Details from "../Details/Details";
-
 function App() {
+    function ProtectedRoute(props) {
+        if (localStorage.getItem("token")) {
+            return props.children;
+        } else {
+            return <Navigate to="/login" />;
+        }
+    }
+
     let routes = createBrowserRouter([
         {
             path: "/",
             element: <MasterLayout />,
             children: [
-                { index: true, element: <Home /> },
-                { path: "about", element: <About /> },
-                { path: "movies", element: <Movies /> },
-                { path: "tvShows", element: <TvShows /> },
-                { path: "register", element: <Register /> },
-                { path: "people", element: <People /> },
-                { path: "details/:id/:type", element: <Details /> },
-                { path: "login", element: <Login /> },
-                { path: "forgetPassword", element: <ForgetPassword /> },
+                {
+                    index: true,
+                    element: (
+                        <ProtectedRoute>
+                            <Home />
+                        </ProtectedRoute>
+                    ),
+                },
+                {
+                    path: "about",
+                    element: (
+                        <ProtectedRoute>
+                            <About />
+                        </ProtectedRoute>
+                    ),
+                },
+                {
+                    path: "movies/:title",
+                    element: (
+                        <ProtectedRoute>
+                            <Movies />
+                        </ProtectedRoute>
+                    ),
+                },
+                {
+                    path: "tvShows/:title",
+                    element: (
+                        <ProtectedRoute>
+                            <TvShows />
+                        </ProtectedRoute>
+                    ),
+                },
+                {
+                    path: "people",
+                    element: (
+                        <ProtectedRoute>
+                            <People />
+                        </ProtectedRoute>
+                    ),
+                },
+                {
+                    path: "details/:id/:type",
+                    element: (
+                        <ProtectedRoute>
+                            <Details />
+                        </ProtectedRoute>
+                    ),
+                },
                 { path: "otpCode", element: <OTPCode /> },
+                { path: "forgetPassword", element: <ForgetPassword /> },
                 { path: "resetPassword", element: <ResetPassword /> },
+                { path: "login", element: <Login /> },
+                { path: "register", element: <Register /> },
                 { path: "*", element: <Notfound /> },
             ],
         },

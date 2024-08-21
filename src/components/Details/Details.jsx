@@ -43,17 +43,19 @@ export default function Details() {
                                 {details.overview ? (
                                     <>
                                         <span className="fw-bold fs-5 text-muted">Overview</span>
-                                        <p>{details.overview}</p>
+                                        <p>{details.overview.split(" ").slice(0, 50).join(" ")}</p>
                                     </>
-                                ) : (
+                                ) : details.biography ? (
                                     <>
                                         <span className="fw-bold fs-5 text-muted">Biography</span>
                                         <p>{details.biography.split(" ").slice(0, 50).join(" ")}</p>
                                     </>
+                                ) : (
+                                    ""
                                 )}
                             </div>
                             {details.genres && (
-                                <ul className="d-flex align-items-center ps-0">
+                                <ul className="d-flex align-items-center ps-0 mt-3">
                                     <span className="fs-5 text-muted">genre </span>
                                     {details.genres.map((genre) => (
                                         <li key={genre.id} className="p-2 bg-gradient fw-bold mx-2 rounded-3">
@@ -105,7 +107,7 @@ export default function Details() {
                                 {details.vote_average !== undefined ? (
                                     <>
                                         <span className=" fs-5 text-muted">vote_average : </span>
-                                        <span className="fs-5">{details.vote_average}</span>
+                                        <span className="fs-5">{details.vote_average.toFixed(1)}</span>
                                     </>
                                 ) : (
                                     <>

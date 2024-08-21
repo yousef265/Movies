@@ -3,16 +3,16 @@ import Item from "../Item/Item";
 import { UserData } from "../../Context/UserData";
 
 export default function Home() {
-    const { getData, userData } = useContext(UserData);
+    const { getTrendingData, userData } = useContext(UserData);
     const [moviesData, setMoviesData] = useState("");
     const [tvsData, setTvsData] = useState("");
     const [peopleData, setPeopleData] = useState("");
 
     useEffect(() => {
-        getData("movie", setMoviesData);
-        getData("tv", setTvsData);
-        getData("person", setPeopleData);
-    }, [getData]);
+        getTrendingData("movie", setMoviesData);
+        getTrendingData("tv", setTvsData);
+        getTrendingData("person", setPeopleData);
+    }, [getTrendingData]);
 
     const renderSection = (title, description, data) => (
         <div className="row">

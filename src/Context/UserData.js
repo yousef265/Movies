@@ -19,7 +19,7 @@ function UserDataProvider(props) {
         }
     }, []);
 
-    async function getData(mediaType, callback) {
+    async function getTrendingData(mediaType, callback) {
         let { data } = await axios.get(`https://api.themoviedb.org/3/trending/${mediaType}/day?api_key=62ead689c7ce69ca894c11b092df4192`);
         callback(data.results);
     }
@@ -29,7 +29,17 @@ function UserDataProvider(props) {
         callback(data);
     }
 
-    return <UserData.Provider value={{ userData, setUserData, handleUserData, getData, getDetails }}>{props.children}</UserData.Provider>;
+    async function getDiffMediaTypeData(mediaType, title, callback, page) {
+        let { data } = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${title}?api_key=62ead689c7ce69ca894c11b092df4192&language=en-US&page=${page}`);
+        callback(data);
+    }
+
+    async function getSearchData(mediaType, searchValue, page, callback) {
+        let { data } = await axios.get(`https://api.themoviedb.org/3/search/${mediaType}?api_key=62ead689c7ce69ca894c11b092df4192&query=${searchValue}&page=${page}`);
+        callback(data);
+    }
+
+    return <UserData.Provider value={{ userData, setUserData, handleUserData, getTrendingData, getDetails, getDiffMediaTypeData, getSearchData }}>{props.children}</UserData.Provider>;
 }
 
 export default UserDataProvider;
