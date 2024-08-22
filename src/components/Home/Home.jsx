@@ -37,7 +37,7 @@ export default function Home() {
                     <h3 className="my-4 text-muted">
                         Welcome <span className="fw-bold text-white text-decoration-underline text-uppercase"> {userData.name}</span>
                     </h3>
-                    <div>
+                    <div className="my-4">
                         {moviesData && renderSection("Movies", "Most watched movies by day", moviesData)}
 
                         {tvsData && renderSection("TV", "Most watched TV shows by day", tvsData)}
