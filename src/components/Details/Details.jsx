@@ -39,23 +39,20 @@ export default function Details() {
                             <h3>{details.title || details.name}</h3>
                             {details.tagline && <p className="my-2 fw-bold text-info fs-5">{details.tagline}</p>}
 
-                            <div>
-                                {details.overview ? (
-                                    <>
-                                        <span className="fw-bold fs-5 text-muted">Overview</span>
-                                        <p>{details.overview.split(" ").slice(0, 50).join(" ")}</p>
-                                    </>
-                                ) : details.biography ? (
-                                    <>
-                                        <span className="fw-bold fs-5 text-muted">Biography</span>
-                                        <p>{details.biography.split(" ").slice(0, 50).join(" ")}</p>
-                                    </>
-                                ) : (
-                                    ""
-                                )}
-                            </div>
+                            {details.overview ? (
+                                <div>
+                                    <span className="fw-bold fs-5 text-muted">Overview</span>
+                                    <p>{details.overview.split(" ").slice(0, 50).join(" ")}</p>
+                                </div>
+                            ) : details.biography ? (
+                                <div>
+                                    <span className="fw-bold fs-5 text-muted">Biography</span>
+                                    <p>{details.biography.split(" ").slice(0, 50).join(" ")}</p>
+                                </div>
+                            ) : null}
+
                             {details.genres && (
-                                <ul className="d-flex align-items-center ps-0 mt-3">
+                                <ul className="d-flex align-items-center flex-wrap ps-0 mt-3">
                                     <span className="fs-5 text-muted">genre </span>
                                     {details.genres.map((genre) => (
                                         <li key={genre.id} className="p-2 bg-gradient fw-bold mx-2 rounded-3">

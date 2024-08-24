@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Item({ data, media_type }) {
     return (
         data && (
-            <div className="col-md-2 col-sm-4">
+            <div className="col-md-2 col-sm-4 g-3">
                 <Link to={`/details/${data.id}/${data.media_type || media_type}`} className="item nav-link   ">
                     <div className="position-relative  overflow-hidden rounded ">
                         <img className="w-100" src={`https://image.tmdb.org/t/p/w500${data.poster_path || data.profile_path}`} alt={data.name || data.title} />

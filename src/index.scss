@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap");
 
 $bg-color: #131722;
 $light-bg-color: rgba(30, 41, 82, 0.2);
@@ -11,30 +11,33 @@ $secondary-font-color: #949cb0;
 body {
     background-color: $bg-color;
     color: $font-color;
-    font-family: 'Montserrat Alternates', sans-serif;
+    font-family: "Montserrat Alternates", sans-serif;
+
     ul {
         list-style-type: none;
     }
 
-    a, a:hover {
+    a,
+    a:hover {
         color: $font-color !important;
     }
 
-    .spanStyle:hover {
-        cursor: pointer;
-        text-decoration: underline;
-        transition: 0.3s;
-    }
-
+    .spanStyle:hover,
     .logout {
         cursor: pointer;
+    }
+
+    .spanStyle:hover {
+        text-decoration: underline;
+        transition: 0.3s;
     }
 
     .content {
         h2 {
             position: relative;
-
-            &::before, &::after {
+            margin: 1rem 0;
+            &::before,
+            &::after {
                 content: "";
                 position: absolute;
                 height: 2px;
@@ -58,13 +61,9 @@ body {
         .layer {
             position: absolute;
             inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            top: 100%;
             padding: 10px 5px 0;
             background-color: rgba(0, 0, 0, 0.5);
-            top: 100%;
             transition: 0.3s;
         }
 
@@ -74,6 +73,10 @@ body {
 
         &:hover .layer {
             top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         &:hover img {
@@ -130,12 +133,35 @@ body {
             }
         }
     }
+
+    // Responsive Styles
+    @media (min-width: 468px) {
+        .contents {
+            width: 75%;
+        }
+
+        .box_buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    @media (max-width: 468px) {
+        .box_buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap-reverse;
+
+            button {
+                margin: 10px;
+                width: fit-content;
+            }
+        }
+    }
+
+    @media (min-width: 768px) {
+        .contents {
+            width: 100%;
+        }
+    }
 }
-
-
-
-
-
-
-
-

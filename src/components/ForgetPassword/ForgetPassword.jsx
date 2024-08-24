@@ -46,7 +46,7 @@ export default function ForgetPassword() {
 
     return (
         <>
-            <div className="w-50 m-auto py-5 mb-5">
+            <div className="mx-auto mt-5 w-75">
                 <h2 className="mb-5">Forget Password Form</h2>
 
                 <p className="text-center text-muted mb-3"> Please enter the email address associated with your account and we'll email you a link to reset your password.</p>
@@ -65,13 +65,13 @@ export default function ForgetPassword() {
                             onChange={(e) => setEmail(e.target.value)}
                             name="email"
                         />
-                        {validateErrors.find((e) => e.context?.label === "email") && <div className="alert alert-danger">{validateErrors.find((e) => e.context?.label === "email").message}</div>}
+                        {validateErrors.find((e) => e.context?.label === "email") && <div className="alert alert-danger  ">{validateErrors.find((e) => e.context?.label === "email").message}</div>}
                     </div>
-                    <div className="mt-3 d-flex justify-content-between">
-                        <Link to={"/login"} className={`btn btn-dark `}>
+                    <div className="mt-3 box_buttons">
+                        <button onClick={() => navigate("/login")} className={`btn btn-dark`}>
                             Back to Login
-                        </Link>
-                        <button className={`btn btn-info `}>{isLoading ? <i className="fa fa-spinner fa-spin"></i> : "Send Request"}</button>
+                        </button>
+                        <button className={`btn btn-info`}>{isLoading ? <i className="fa fa-spinner fa-spin"></i> : "Send Request"}</button>
                     </div>
                 </form>
             </div>

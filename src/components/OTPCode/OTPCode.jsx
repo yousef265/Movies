@@ -57,9 +57,9 @@ export default function OTPCode() {
 
     return (
         <>
-            <div className="w-50 m-auto py-5 mb-5">
+            <div className=" m-auto mt-5 w-75">
                 <h2 className="mb-5">Please check your email!</h2>
-                <p className="text-center text-muted">
+                <p className="text-center text-muted ">
                     We've sent a 6-digit confirmation email to your <span className="fw-bold text-white">{localStorage.getItem("email")}</span>. Please enter the code in below box to verify your
                     email.
                 </p>
@@ -69,18 +69,15 @@ export default function OTPCode() {
                         <InputOtp value={otpCode} length={6} onChange={(e) => setOtpCode(e.value)} />
                     </div>
                     {validationError.length !== 0 && <div className="alert alert-danger mt-3"> {validationError.message || validationError}</div>}
-                    <div className="mt-3 d-flex justify-content-between flex-wrap">
-                        <Link to={"/login"} className={`btn btn-dark `}>
-                            Back to Login
-                        </Link>
-                        <div className="d-flex align-items-center">
-                            <p className="mb-0 text text-muted me-4">
+                    <div className="mt-3  ">
+                        <div className="d-flex align-items-center justify-content-between ">
+                            <p className="mb-0 text text-muted me-2 text-break">
                                 Don’t have a code?{" "}
                                 <span className="spanStyle fw-bold text-white" onClick={reSendCode}>
                                     Resend Code
                                 </span>
                             </p>
-                            <button className={`btn btn-info d-block`}>{isLoading ? <i className="fa fa-spinner fa-spin"></i> : "Verify"}</button>
+                            <button className={`btn btn-info d-block `}>{isLoading ? <i className="fa fa-spinner fa-spin"></i> : "Verify"}</button>
                         </div>
                     </div>
                 </form>

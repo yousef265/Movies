@@ -52,28 +52,14 @@ export default function ResetPassword() {
 
     return (
         <>
-            <div className="w-50 m-auto py-5 mb-5">
+            <div className="mx-auto mt-5 w-75">
                 <h2 className="mb-5">Reset Password</h2>
-                <p className="text-center text-muted mb-3"> We have verified your code. Please enter a new password.</p>
+                <p className="text-center text-muted mb-3 fs-5"> We have verified your code. Please enter a new password.</p>
 
                 {APiErrors && <div className="alert alert-danger">{APiErrors}</div>}
 
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    {/* <div className="input-data my-2">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            onChange={(e) => getUserData(e)}
-                            className={`form-control my-2 ${
-                                validateErrors.length !== 0 && (validateErrors.find((e) => e.context?.label === "email") ? "is-invalid" : validateErrors[0] === "done" ? "is-valid" : "is-valid")
-                            }`}
-                            name="email"
-                        />
-                        {validateErrors.find((e) => e.context?.label === "email") && <div className="alert alert-danger ">{validateErrors.find((e) => e.context?.label === "email").message}</div>}
-                    </div> */}
-
-                    <div className="alert alert-secondary fw-bold h5">{localStorage.getItem("email")}</div>
+                    <div className="alert alert-secondary fw-bold h5 text-break">{localStorage.getItem("email")}</div>
 
                     <div className="input-data my-2 ">
                         <label htmlFor="password">NewPassword</label>
@@ -88,7 +74,7 @@ export default function ResetPassword() {
                                 name="password"
                             />
 
-                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="btn btn-outline-secondary ms-3">
+                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="btn btn-outline-secondary ms-3 ">
                                 {showPassword ? <i className="fa-solid fa-eye fs-4 "></i> : <i className="fa-solid fa-eye-slash fs-4 "></i>}
                             </button>
                         </div>
