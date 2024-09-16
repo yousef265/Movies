@@ -57,7 +57,7 @@ export default function OTPCode() {
 
     return (
         <>
-            <div className=" m-auto mt-5 w-75">
+            <div className=" m-auto mt-5 authContent">
                 <h2 className="mb-5">Please check your email!</h2>
                 <p className="text-center text-muted ">
                     We've sent a 6-digit confirmation email to your <span className="fw-bold text-white">{localStorage.getItem("email")}</span>. Please enter the code in below box to verify your

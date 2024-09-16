@@ -52,7 +52,7 @@ export default function ResetPassword() {
 
     return (
         <>
-            <div className="mx-auto mt-5 w-75">
+            <div className="mx-auto mt-5 authContent">
                 <h2 className="mb-5">Reset Password</h2>
                 <p className="text-center text-muted mb-3 fs-5"> We have verified your code. Please enter a new password.</p>
 

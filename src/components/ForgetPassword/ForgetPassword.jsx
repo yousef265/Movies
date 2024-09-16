@@ -46,7 +46,7 @@ export default function ForgetPassword() {
 
     return (
         <>
-            <div className="mx-auto mt-5 w-75">
+            <div className="mx-auto mt-5 authContent">
                 <h2 className="mb-5">Forget Password Form</h2>
 
                 <p className="text-center text-muted mb-3"> Please enter the email address associated with your account and we'll email you a link to reset your password.</p>

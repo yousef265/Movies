@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Navbar.module.scss";
 import { UserData } from "../../Context/UserData";
 
@@ -14,13 +14,13 @@ export default function Navbar() {
     }
 
     return (
-        <nav className={`navbar navbar-expand-lg ${styles.bgNavbar} py-3`}>
+        <nav className={`navbar navbar-expand-lg ${styles.editNavbar}  py-3`}>
             <div className="container">
-                <Link className="navbar-brand" to="">
+                <NavLink className="navbar-brand" to="">
                     Noxe
-                </Link>
+                </NavLink>
                 <button
-                    className="navbar-toggler"
+                    className="navbar-toggler bg-gradient"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
@@ -28,83 +28,83 @@ export default function Navbar() {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon "></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {userData && (
                         <ul className="navbar-nav  mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link" to="">
+                                <NavLink className="nav-link active-link" to="">
                                     Home
-                                </Link>
+                                </NavLink>
                             </li>
 
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <NavLink className="nav-link active-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Movies
-                                </Link>
-                                <ul className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                </NavLink>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <Link className="dropdown-item" to={"/movies/popular"}>
+                                        <NavLink className="dropdown-item" to={"/movies/popular"}>
                                             Popular
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to={"/movies/now_playing"}>
+                                        <NavLink className="dropdown-item" to={"/movies/now_playing"}>
                                             Now Playing
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to={"/movies/top_rated"}>
+                                        <NavLink className="dropdown-item" to={"/movies/top_rated"}>
                                             Top Rated
-                                        </Link>
+                                        </NavLink>
                                     </li>
 
                                     <li>
-                                        <Link className="dropdown-item" to={"/movies/upcoming"}>
+                                        <NavLink className="dropdown-item" to={"/movies/upcoming"}>
                                             UpComing
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <NavLink className="nav-link active-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Tv Shows
-                                </Link>
-                                <ul className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                </NavLink>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
-                                        <Link className="dropdown-item" to={"/tvShows/popular"}>
+                                        <NavLink className="dropdown-item" to={"/tvShows/popular"}>
                                             Popular
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to={"/tvShows/airing_today"}>
+                                        <NavLink className="dropdown-item" to={"/tvShows/airing_today"}>
                                             Airing Today
-                                        </Link>
+                                        </NavLink>
                                     </li>
 
                                     <li>
-                                        <Link className="dropdown-item" to={"/tvShows/on_the_air"}>
+                                        <NavLink className="dropdown-item" to={"/tvShows/on_the_air"}>
                                             On TV
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                     <li>
-                                        <Link className="dropdown-item" to={"/tvShows/top_rated"}>
+                                        <NavLink className="dropdown-item" to={"/tvShows/top_rated"}>
                                             Top Rated
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                 </ul>
                             </li>
 
                             <li className="nav-item">
-                                <Link className="nav-link" to="people">
+                                <NavLink className="nav-link active-link" to="people">
                                     People
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="about">
+                                <NavLink className="nav-link active-link" to="about">
                                     About
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                     )}
@@ -119,12 +119,12 @@ export default function Navbar() {
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="login">
+                                    <Link className="nav-link active-link" to="login">
                                         Login
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="register">
+                                    <Link className="nav-link active-link" to="register">
                                         Register
                                     </Link>
                                 </li>

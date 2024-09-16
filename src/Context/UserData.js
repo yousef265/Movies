@@ -6,6 +6,8 @@ export const UserData = createContext();
 
 function UserDataProvider(props) {
     const [userData, setUserData] = useState(null);
+    const baseUrl = "https://api.themoviedb.org/3/";
+    const api_key = "62ead689c7ce69ca894c11b092df4192";
 
     function handleUserData() {
         const token = localStorage.getItem("token");
@@ -19,27 +21,46 @@ function UserDataProvider(props) {
         }
     }, []);
 
-    async function getTrendingData(mediaType, callback) {
-        let { data } = await axios.get(`https://api.themoviedb.org/3/trending/${mediaType}/day?api_key=62ead689c7ce69ca894c11b092df4192`);
-        callback(data.results);
-    }
+    const fetchData = async (endPoint, params = {}) => {
+        try {
+            const { data } = await axios.get(`${baseUrl}${endPoint}`, {
+                params: {
+                    api_key,
+                    ...params,
+                },
+            });
+            return data;
+        } catch (error) {
+            console.error("Error Fetching Data:", error);
+        }
+    };
 
-    async function getDetails(mediaType, id, callback) {
-        let { data } = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${id}?api_key=62ead689c7ce69ca894c11b092df4192&append_to_response=videos,images`);
-        callback(data);
-    }
+    // const getTrailers = async () => {
 
-    async function getDiffMediaTypeData(mediaType, title, callback, page) {
-        let { data } = await axios.get(`https://api.themoviedb.org/3/${mediaType}/${title}?api_key=62ead689c7ce69ca894c11b092df4192&language=en-US&page=${page}`);
-        callback(data);
-    }
+    // };
 
-    async function getSearchData(mediaType, searchValue, page, callback) {
-        let { data } = await axios.get(`https://api.themoviedb.org/3/search/${mediaType}?api_key=62ead689c7ce69ca894c11b092df4192&query=${searchValue}&page=${page}`);
-        callback(data);
-    }
+    // async function getTrendingData(endPoint, dataContainer) {
+    //     await fetchData(endPoint, {}, dataContainer);
+    // }
 
-    return <UserData.Provider value={{ userData, setUserData, handleUserData, getTrendingData, getDetails, getDiffMediaTypeData, getSearchData }}>{props.children}</UserData.Provider>;
+    // // These Function Will Be Updating
+
+    // async function getDetails(mediaType, id, callback) {
+    //     let { data } = await axios.get(`${baseUrl}${mediaType}/${id}?api_key=${api_key}&append_to_response=videos,images`);
+    //     callback(data);
+    // }
+
+    // async function getDiffMediaTypeData(mediaType, title, callback, page) {
+    //     let { data } = await axios.get(`${baseUrl}${mediaType}/${title}?api_key=${api_key}&language=en-US&page=${page}`);
+    //     callback(data);
+    // }
+
+    // async function getSearchData(mediaType, searchValue, page, callback) {
+    //     let { data } = await axios.get(`${baseUrl}search/${mediaType}?api_key=${api_key}&query=${searchValue}&page=${page}`);
+    //     callback(data);
+    // }
+
+    return <UserData.Provider value={{ userData, setUserData, handleUserData, fetchData }}>{props.children}</UserData.Provider>;
 }
 
 export default UserDataProvider;

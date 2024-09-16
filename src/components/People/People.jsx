@@ -36,11 +36,10 @@ export default function People() {
         <>
             {peopleData ? (
                 <>
-                    <input type="text" onChange={handleSearchChange} className="form-control mt-3 w-50 mx-auto bg-transparent text-white fw-bold" placeholder={`Search for a Person...`} />
+                    <input type="text" onChange={handleSearchChange} className="form-control my-3 w-50 mx-auto bg-transparent text-white fw-bold" placeholder={`Search for a Person...`} />
                     {peopleData.results.length > 0 ? (
                         <>
-                            {" "}
-                            <div className="row mt-5">
+                            <div className="row">
                                 {peopleData.results.map((item) => (
                                     <Item data={item} key={item.id} media_type={"person"} />
                                 ))}

@@ -69,7 +69,7 @@ function App() {
                     ),
                 },
                 {
-                    path: "details/:id/:type",
+                    path: "/:type/:id",
                     element: (
                         <ProtectedRoute>
                             <Details />

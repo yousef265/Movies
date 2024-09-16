@@ -84,7 +84,7 @@ export default function Login() {
 
     return (
         <>
-            <div className="m-auto mt-5 w-75">
+            <div className="m-auto mt-5 authContent">
                 <h2 className="mb-5">Login Form</h2>
 
                 {APiErrors && <div className="alert alert-danger">{APiErrors}</div>}

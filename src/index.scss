@@ -1,167 +1,240 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300&display=swap");
 
+// Variables
 $bg-color: #131722;
 $light-bg-color: rgba(30, 41, 82, 0.2);
 $bg-transparent: rgba(19, 91, 117, 0.6);
 $font-color: #fff;
 $border-color: rgba(168, 168, 168, 0.24);
-$border-height: 1px;
 $secondary-font-color: #949cb0;
+$highlight-color: wheat;
+$main-transition: 0.3s;
 
+// Global Styles
 body {
     background-color: $bg-color;
     color: $font-color;
     font-family: "Montserrat Alternates", sans-serif;
+    overflow-y: scroll; /* Ensure the container is scrollable */
+    padding: 0.5rem 0;
 
     ul {
         list-style-type: none;
+        padding-left: 0;
+        margin: 0;
     }
 
     a,
-    a:hover {
-        color: $font-color !important;
-    }
-
-    .spanStyle:hover,
     .logout {
+        color: $font-color !important;
         cursor: pointer;
-    }
-
-    .spanStyle:hover {
-        text-decoration: underline;
-        transition: 0.3s;
-    }
-
-    .content {
-        h2 {
-            position: relative;
-            margin: 1rem 0;
-            &::before,
-            &::after {
-                content: "";
-                position: absolute;
-                height: 2px;
-                background-color: $border-color;
-            }
-
-            &::before {
-                width: 25%;
-                top: -10px;
-            }
-
-            &::after {
-                width: 75%;
-                bottom: -10px;
-                left: 0;
-            }
+        &:hover {
+            color: $highlight-color !important;
         }
     }
+}
 
-    .item {
-        .layer {
-            position: absolute;
-            inset: 0;
-            top: 100%;
-            padding: 10px 5px 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            transition: 0.3s;
-        }
+::-webkit-scrollbar {
+    height: 0.75rem;
+    width: 0.75rem;
+}
 
-        img {
-            transition: 0.3s;
-        }
+::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-        &:hover .layer {
-            top: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: 4px;
+}
 
-        &:hover img {
-            transform: scale(1.2);
-        }
+// Navbar Styles
 
-        .vote {
-            position: absolute;
-            top: 0;
-            right: 0;
-            z-index: 1;
-        }
-    }
+.dropdown-menu {
+    background-color: black;
+    position: absolute;
+    z-index: 111111;
+}
 
-    .dropdown-item:hover {
+.dropdown-item {
+    &.active,
+    &:active,
+    &:hover {
         background-color: $bg-color;
+        color: $highlight-color !important;
+    }
+}
+
+// Content Styles
+.content {
+    h2 {
+        position: relative;
+        margin: 1rem 0;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            height: 2px;
+            background-color: $border-color;
+        }
+
+        &::before {
+            width: 25%;
+            top: -10px;
+        }
+
+        &::after {
+            width: 75%;
+            bottom: -10px;
+            left: 0;
+        }
+    }
+}
+
+// Background Image with Overlay
+.backgroundImage {
+    min-height: 70vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
     }
 
-    .pagination {
+    .details {
+        padding: 1rem;
+        position: relative;
+        z-index: 2;
+        color: white !important;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        padding: 10px;
-        margin: 1.25rem 0;
+        flex-wrap: wrap;
+    }
+}
 
-        @media (max-width: 768px) {
-            flex-direction: column;
-            padding: 5px;
+// Options Style
+.p-selectbutton .p-button.p-highlight,
+.p-selectbutton .p-button,
+.p-dropdown {
+    background-color: transparent;
+}
+
+.p-dropdown-panel {
+    background-color: black;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus {
+    background-color: $bg-transparent;
+    color: $highlight-color;
+}
+
+.p-inputtext {
+    color: white;
+    font-weight: bold;
+}
+
+.p-button:focus,
+.p-dropdown:not(.p-disabled).p-focus {
+    box-shadow: none;
+}
+
+// Pagination Styles
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin: 1.25rem 0;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    @media (max-width: 576px) {
+        padding: 2px;
+    }
+
+    .p-paginator {
+        width: fit-content;
+        background-color: $bg-transparent;
+        border-radius: 10px;
+
+        .p-paginator-page.p-highlight,
+        .p-paginator-page:not(.p-highlight):hover {
+            background-color: $bg-color;
+            color: $font-color;
+            border-radius: 50%;
+            font-weight: bold;
         }
 
-        @media (max-width: 576px) {
-            padding: 2px;
+        .p-paginator-first,
+        .p-paginator-prev,
+        .p-paginator-next,
+        .p-paginator-last {
+            color: $secondary-font-color;
         }
+    }
+}
 
-        .p-paginator {
+// Menu Styles
+// .menu {
+//     position: sticky !important;
+//     top: 0;
+//     right: 0;
+//     left: 0;
+//     z-index: 1111;
+//     margin: 0 auto;
+
+//     .menuContent {
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         flex-direction: row;
+//         flex-wrap: wrap;
+//         text-align: center !important;
+
+//         li {
+//             margin: 0 10px;
+//         }
+//     }
+// }
+
+// Responsive Styles
+.authContent {
+    width: 90%;
+}
+@media (min-width: 768px) {
+    .authContent {
+        width: 60%;
+    }
+}
+
+@media (min-width: 468px) {
+    .box_buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 468px) {
+    .box_buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap-reverse;
+
+        button {
+            margin: 10px;
             width: fit-content;
-            background-color: $bg-transparent;
-            border-radius: 10px;
-
-            .p-paginator-page.p-highlight,
-            .p-paginator-page:not(.p-highlight):hover {
-                background-color: $bg-color;
-                color: $font-color;
-                border-radius: 50%;
-                font-weight: bold;
-            }
-
-            .p-paginator-first,
-            .p-paginator-prev,
-            .p-paginator-next,
-            .p-paginator-last {
-                color: $secondary-font-color;
-            }
-        }
-    }
-
-    // Responsive Styles
-    @media (min-width: 468px) {
-        .contents {
-            width: 75%;
-        }
-
-        .box_buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
-
-    @media (max-width: 468px) {
-        .box_buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap-reverse;
-
-            button {
-                margin: 10px;
-                width: fit-content;
-            }
-        }
-    }
-
-    @media (min-width: 768px) {
-        .contents {
-            width: 100%;
         }
     }
 }

@@ -81,7 +81,7 @@ export default function Register() {
 
     return (
         <>
-            <div className="m-auto mt-5 w-75">
+            <div className="m-auto mt-5 authContent">
                 <h2 className="mb-5">Register Form</h2>
 
                 {APiErrors && <div className="alert alert-danger">{APiErrors}</div>}

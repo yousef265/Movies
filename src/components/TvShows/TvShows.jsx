@@ -42,10 +42,10 @@ export default function TvShows() {
         <>
             {tvData ? (
                 <>
-                    <input type="text" onChange={handleSearchChange} className="form-control mt-3 w-50 mx-auto bg-transparent text-white fw-bold" placeholder={`Search for ${title}...`} />
+                    <input type="text" onChange={handleSearchChange} className="form-control my-3 w-50 mx-auto bg-transparent text-white fw-bold" placeholder={`Search for ${title}...`} />
                     {tvData.results.length > 0 ? (
                         <>
-                            <div className="row mt-5">
+                            <div className="row">
                                 {tvData.results.map((item) => (
                                     <Item data={item} key={item.id} media_type={"tv"} />
                                 ))}
